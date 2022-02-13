@@ -62,9 +62,9 @@ public class TaskReminder {
 							}
 						}
 					}
+					writeLogs(logFile, "Task processing over for the minute: " + minute);
 					int second = nowTime.get(Calendar.SECOND);
-					int milliSecond = nowTime.get(Calendar.MILLISECOND);
-					Thread.sleep(((50 - second) * 1000) + (1000 - milliSecond));
+					Thread.sleep(((61 - second) * 1000));
 				} else {
 					writeLogs(logFile, "Task not found for the hour: " + hour);
 					Thread.sleep((60 - minute) * 60 * 1000);
@@ -93,7 +93,7 @@ public class TaskReminder {
 		int minute = nowTime.get(Calendar.MINUTE);
 
 		BufferedWriter writer = new BufferedWriter(new FileWriter(logFile));
-		writer.write(hour + ":" + minute + ":: " + content);
+		writer.append(hour + ":" + minute + ":: " + content);
 		writer.close();
 	}
 }
